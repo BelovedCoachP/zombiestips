@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paradox Junction Easter Egg Guide — Black Ops 7 Zombies</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Exo+2:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:     #0a0a0a;
+      --bg2:    #111111;
+      --bg3:    #181818;
+      --border: #333333;
+      --green:  #00ff88;
+      --red:    #ff4466;
+      --gold:   #ffd700;
+      --blue:   #6699ff;
+      --text:   #e8e8e8;
+      --muted:  #a0a0a0;
+      --focus:  #ffffff;
+      --nav-h:  60px;
+      --max-w:  860px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 400;
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* SKIP LINK */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 16px;
+      background: var(--green);
+      color: #000;
+      font-family: 'Exo 2', sans-serif;
+      font-weight: 700;
+      font-size: 1rem;
+      padding: 10px 18px;
+      z-index: 9000;
+      text-decoration: none;
+      transition: top 0.15s;
+    }
+    .skip-link:focus { top: 0; outline: 3px solid var(--focus); outline-offset: 2px; }
+
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+
+    .visually-hidden {
+      position: absolute; width: 1px; height: 1px;
+      padding: 0; margin: -1px; overflow: hidden;
+      clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+    }
+
+    /* NAV */
+    #top-nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: var(--nav-h);
+      background: rgba(10,10,10,0.97);
+      border-bottom: 2px solid var(--green);
+      display: flex; align-items: center;
+      z-index: 1000; overflow-x: auto;
+      padding: 0 20px; gap: 4px;
+      backdrop-filter: blur(8px);
+    }
+    #top-nav::-webkit-scrollbar { height: 3px; }
+    #top-nav::-webkit-scrollbar-thumb { background: var(--border); }
+    .nav-brand {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.875rem; font-weight: 900;
+      color: var(--green); letter-spacing: 0.12em;
+      text-transform: uppercase; white-space: nowrap;
+      margin-right: 20px; flex-shrink: 0;
+    }
+    #top-nav a {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; color: var(--muted);
+      text-decoration: none; padding: 8px 10px;
+      white-space: nowrap; transition: color 0.2s;
+      letter-spacing: 0.04em; border-radius: 2px; flex-shrink: 0;
+    }
+    #top-nav a:hover { color: var(--green); }
+    #top-nav a:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; color: var(--green); }
+
+    /* PROGRESS */
+    #progress-wrap {
+      position: fixed; top: var(--nav-h); left: 0; right: 0;
+      height: 4px; background: var(--border); z-index: 999;
+    }
+    #progress-bar {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, var(--green), var(--red));
+      transition: width 0.25s ease;
+    }
+
+    /* STEP COUNTER */
+    #step-counter {
+      position: fixed; bottom: 24px; right: 24px;
+      background: rgba(10,10,10,0.95);
+      border: 2px solid var(--green);
+      padding: 10px 18px;
+      font-family: 'Orbitron', monospace;
+      font-size: 0.875rem; font-weight: 700;
+      color: var(--green); letter-spacing: 0.08em;
+      z-index: 1000; line-height: 1.5;
+    }
+    #step-counter .counter-num { color: var(--text); font-size: 1.125rem; }
+
+    /* HERO */
+    #hero {
+      padding: calc(var(--nav-h) + 64px) 24px 56px;
+      text-align: center; position: relative; overflow: hidden;
+    }
+    #hero::after {
+      content: ''; position: absolute;
+      bottom: 0; left: 50%; transform: translateX(-50%);
+      width: 60%; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--green), transparent);
+    }
+    .hero-eyebrow {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; color: var(--red);
+      letter-spacing: 0.25em; text-transform: uppercase;
+      margin-bottom: 14px;
+      animation: fadeUp 0.5s ease both;
+    }
+    h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 900; line-height: 1.15;
+      color: var(--text); text-transform: uppercase;
+      letter-spacing: 0.04em;
+      animation: fadeUp 0.5s 0.08s ease both;
+    }
+    h1 .accent { color: var(--green); }
+    .hero-sub {
+      margin: 18px auto 0; font-size: 1.0625rem;
+      color: var(--muted); max-width: 560px; line-height: 1.7;
+      animation: fadeUp 0.5s 0.16s ease both;
+    }
+    .hero-badges {
+      display: flex; justify-content: center;
+      gap: 10px; margin-top: 22px; flex-wrap: wrap;
+      animation: fadeUp 0.5s 0.24s ease both;
+    }
+    .badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; padding: 6px 12px;
+      border: 1px solid; letter-spacing: 0.06em;
+      text-transform: uppercase; font-weight: 700;
+    }
+    .badge-green { border-color: var(--green); color: var(--green); }
+    .badge-red   { border-color: var(--red);   color: var(--red);   }
+    .badge-gold  { border-color: var(--gold);  color: var(--gold);  }
+
+    /* MAIN */
+    main { max-width: var(--max-w); margin: 0 auto; padding: 0 20px 100px; }
+
+    /* SECTION HEADERS */
+    .section-header { display: flex; align-items: center; gap: 14px; margin: 52px 0 22px; }
+    .section-header h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: 1rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--green); white-space: nowrap;
+    }
+    .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--green), transparent); }
+    .section-intro { font-size: 1rem; color: var(--muted); margin-bottom: 18px; line-height: 1.7; }
+
+    /* TIP CARDS */
+    .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin-bottom: 10px; }
+    .tip-card {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-left: 4px solid var(--green); padding: 16px 18px;
+      font-size: 1rem; line-height: 1.7; color: var(--text);
+    }
+    .tip-card .tip-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; font-weight: 700;
+      color: var(--green); letter-spacing: 0.08em;
+      text-transform: uppercase; margin-bottom: 8px; display: block;
+    }
+    .tip-card.warn { border-left-color: var(--red); }
+    .tip-card.warn .tip-label { color: var(--red); }
+    .tip-card.gold { border-left-color: var(--gold); }
+    .tip-card.gold .tip-label { color: var(--gold); }
+
+    /* STEP CARDS */
+    .step-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s;
+    }
+    .step-card.open { border-color: var(--green); }
+    .step-card.done { border-color: #1e4030; }
+
+    .step-header {
+      display: flex; align-items: center; gap: 16px;
+      padding: 16px 20px; cursor: pointer;
+      background: none; border: none; width: 100%;
+      text-align: left; color: inherit; transition: background 0.2s;
+    }
+    .step-header:hover  { background: rgba(0,255,136,0.05); }
+    .step-header:focus-visible { outline: 3px solid var(--focus); outline-offset: -3px; }
+
+    .step-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 0.875rem; font-weight: 900;
+      color: #000; background: var(--green);
+      min-width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; padding: 0 4px;
+    }
+    .step-card.done .step-num { background: #1e4030; color: var(--green); }
+    .step-card.warn-card .step-num { background: var(--red); }
+
+    .step-title {
+      flex: 1; font-family: 'Exo 2', sans-serif;
+      font-weight: 700; font-size: 1.0625rem;
+      letter-spacing: 0.01em; color: var(--text);
+    }
+    .step-card.done .step-title::after {
+      content: ' — Complete';
+      font-size: 0.875rem; color: var(--green);
+      font-weight: 400; font-family: 'Share Tech Mono', monospace;
+    }
+
+    .step-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; font-weight: 700;
+      padding: 4px 9px; border: 1px solid;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      flex-shrink: 0; white-space: nowrap;
+    }
+    .tag-past  { border-color: var(--blue);  color: var(--blue);  }
+    .tag-dest  { border-color: var(--red);   color: var(--red);   }
+    .tag-both  { border-color: var(--gold);  color: var(--gold);  }
+    .tag-boss  { border-color: #ff8844;      color: #ff8844;      }
+
+    .step-chevron {
+      width: 20px; text-align: center; color: var(--muted);
+      transition: transform 0.25s; font-size: 1rem; flex-shrink: 0;
+    }
+    .step-card.open .step-chevron { transform: rotate(180deg); color: var(--green); }
+
+    /* STEP BODY */
+    .step-body {
+      display: none; padding: 6px 20px 22px 70px;
+      border-top: 1px solid var(--border);
+    }
+    .step-card.open .step-body { display: block; }
+
+    .step-body p {
+      margin-top: 12px; font-size: 1rem;
+      line-height: 1.8; color: var(--text);
+    }
+    .step-body p:first-child { margin-top: 14px; }
+    .step-body ul { margin: 12px 0 0 0; padding-left: 22px; }
+    .step-body ul li { margin-bottom: 8px; font-size: 1rem; line-height: 1.75; color: var(--text); }
+
+    .inline-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; padding: 2px 7px;
+      background: rgba(0,255,136,0.12); color: var(--green);
+      border: 1px solid rgba(0,255,136,0.25); font-weight: 700;
+    }
+    .inline-tag.red {
+      background: rgba(255,68,102,0.12); color: var(--red);
+      border-color: rgba(255,68,102,0.25);
+    }
+    .inline-tag.gold {
+      background: rgba(255,215,0,0.1); color: var(--gold);
+      border-color: rgba(255,215,0,0.2);
+    }
+
+    /* CALLOUTS */
+    .callout {
+      margin-top: 14px; padding: 13px 16px;
+      border-left: 4px solid var(--red);
+      background: rgba(255,68,102,0.07);
+      font-size: 1rem; line-height: 1.75; color: var(--text);
+    }
+    .callout.green { border-left-color: var(--green); background: rgba(0,255,136,0.06); }
+    .callout.gold  { border-left-color: var(--gold);  background: rgba(255,215,0,0.06); }
+    .callout strong {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; font-weight: 700;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      display: block; margin-bottom: 5px; color: var(--red);
+    }
+    .callout.green strong { color: var(--green); }
+    .callout.gold  strong { color: var(--gold); }
+
+    /* MARK COMPLETE BUTTON */
+    .check-btn {
+      margin-top: 18px;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.875rem; font-weight: 700;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--muted); border: 2px solid var(--border);
+      padding: 10px 18px; cursor: pointer; background: none;
+      transition: all 0.2s; min-height: 44px; min-width: 44px;
+    }
+    .check-btn:hover { border-color: var(--green); color: var(--green); background: rgba(0,255,136,0.06); }
+    .check-btn:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    .step-card.done .check-btn { border-color: var(--green); color: var(--green); }
+
+    /* PIANO NOTES */
+    .piano-notes {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 1.25rem; color: var(--green);
+      letter-spacing: 0.2em; text-align: center;
+      margin-top: 14px; padding: 16px;
+      background: rgba(0,255,136,0.06);
+      border: 1px solid rgba(0,255,136,0.2);
+    }
+
+    /* PHASE BLOCKS */
+    .phase-block { margin-top: 16px; padding: 14px 16px; border: 1px solid var(--border); background: var(--bg3); }
+    .phase-label {
+      font-family: 'Orbitron', monospace; font-size: 0.875rem;
+      font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 10px; display: block;
+    }
+    .phase-1 .phase-label { color: var(--green); }
+    .phase-2 .phase-label { color: var(--gold);  }
+    .phase-3 .phase-label { color: var(--red);   }
+    .phase-block p { font-size: 1rem; line-height: 1.8; color: var(--text); }
+
+    /* CREDITS */
+    #credits { margin-top: 64px; padding: 36px 20px; border-top: 1px solid var(--border); text-align: center; }
+    #credits h2 {
+      font-family: 'Orbitron', monospace; font-size: 1rem; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 20px;
+    }
+    .credit-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .credit-links a {
+      font-family: 'Share Tech Mono', monospace; font-size: 1rem;
+      color: var(--green); text-decoration: underline;
+      text-underline-offset: 3px; padding: 6px 4px;
+      min-height: 44px; display: inline-flex; align-items: center; transition: color 0.2s;
+    }
+    .credit-links a:hover { color: var(--text); }
+    .credit-links a:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; }
+    #credits p { margin-top: 18px; font-size: 1rem; color: var(--muted); line-height: 1.65; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 640px) {
+      .step-body { padding-left: 20px; }
+      .tips-grid { grid-template-columns: 1fr; }
+      #step-counter { bottom: 16px; right: 16px; padding: 8px 14px; }
+      .nav-brand { display: none; }
+      .step-tag { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<nav id="top-nav" aria-label="Page sections">
+  <span class="nav-brand" aria-hidden="true">Paradox Junction</span>
+  <a href="#tips">Tips</a>
+  <a href="#prereqs">Prerequisites</a>
+  <a href="#blundergat">Blundergat</a>
+  <a href="#sundergat">Sundergat</a>
+  <a href="#twins">Twins</a>
+  <a href="#children">Children's Games</a>
+  <a href="#piano">Piano</a>
+  <a href="#jacks">Jacks</a>
+  <a href="#clock">Clock</a>
+  <a href="#boss">Boss Fight</a>
+</nav>
+
+<div id="progress-wrap" aria-hidden="true" role="presentation">
+  <div id="progress-bar"></div>
+</div>
+
+<div id="step-counter" aria-live="polite" aria-atomic="true">
+  <div>STEPS COMPLETE</div>
+  <div><span class="counter-num" id="done-count">0</span> / <span class="counter-num" id="total-count">0</span></div>
+</div>
+
+<header>
+  <section id="hero">
+    <p class="hero-eyebrow">Black Ops 7 Zombies · Season 2 Reloaded</p>
+    <h1>Paradox <span class="accent">Junction</span><br>Easter Egg Guide</h1>
+    <p class="hero-sub">Full main quest walkthrough — solo and co-op. Steps ordered by consistency across multiple top community guides.</p>
+    <div class="hero-badges" aria-label="Guide attributes">
+      <span class="badge badge-green">Solo Friendly</span>
+      <span class="badge badge-red">No Directed Mode</span>
+      <span class="badge badge-gold">Wonder Weapon Required</span>
+    </div>
+  </section>
+</header>
+
+<main id="main-content">
+
+  <div class="section-header" id="tips">
+    <h2>Tips &amp; Loadout</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <div class="tips-grid" role="list" aria-label="Tips and loadout recommendations">
+    <div class="tip-card gold" role="listitem">
+      <span class="tip-label">Recommended Weapon</span>
+      Novaline or any AR or LMG with range. You will have the Sundergat for mechanics, so bring a ranged weapon as your backup for the boss.
+    </div>
+    <div class="tip-card" role="listitem">
+      <span class="tip-label">Must-Have Perks</span>
+      Jugger-Nog and Stamin-Up early. You need <strong>Death Perception</strong> to find the Headset and <strong>Wisp Tea</strong> to retrieve the Goggles. Both are required.
+    </div>
+    <div class="tip-card" role="listitem">
+      <span class="tip-label">Gobble Gums</span>
+      Shields Up and Aftertaste are both blue rarity — easy to stock. Kazmirs are excellent for boss concentration field defenses. Monkey Bombs help throughout.
+    </div>
+    <div class="tip-card warn" role="listitem">
+      <span class="tip-label">Two Versions of the Map</span>
+      You play in <strong>Destroyed</strong> (post-nuke future) and <strong>Past</strong> (pre-nuke). Dog rounds auto-teleport you. The Temporal Conduit costs 1,500 Essence to switch manually.
+    </div>
+    <div class="tip-card warn" role="listitem">
+      <span class="tip-label">Solo Tip</span>
+      For tortured zombie steps and children's games, thin the active round down to 1 or 2 zombies before triggering them. Far easier to manage solo.
+    </div>
+    <div class="tip-card gold" role="listitem">
+      <span class="tip-label">Equipment to Bring</span>
+      Tomahawks or any explosive, Molotovs, and a Psych or Stun Grenade. All can be purchased at the crafting bench if needed.
+    </div>
+  </div>
+
+  <div class="section-header" id="prereqs">
+    <h2>Prerequisites</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s1">
+    <button class="step-header" onclick="toggleStep('s1')" aria-expanded="false" aria-controls="s1-body" id="s1-btn">
+      <span class="step-num" aria-hidden="true">1</span>
+      <span class="step-title">Pick Up Truck Keys &amp; Fill the Acid Vial</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s1-body" role="region" aria-labelledby="s1-btn">
+      <p>As soon as you spawn, head to the <strong>Yellow House backyard</strong> and hold interact on the body stabbed with a golf club to collect the Truck Keys.</p>
+      <p>Also in the Yellow House, go upstairs and interact with the <strong>chemistry set</strong> on the desk to collect a vial of SO3. Then cross to the <strong>Green House kitchen</strong> and interact with the sink to fill it with acid. This gives you H2SO4, needed later for a Blundergat part.</p>
+      <div class="callout green"><strong>Do This Round 1</strong>Both can be grabbed immediately. Doing the acid early saves backtracking later.</div>
+      <button class="check-btn" onclick="markDone('s1')" aria-label="Mark Step 1 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s2">
+    <button class="step-header" onclick="toggleStep('s2')" aria-expanded="false" aria-controls="s2-body" id="s2-btn">
+      <span class="step-num" aria-hidden="true">2</span>
+      <span class="step-title">Survive Dog Round &amp; Unlock Pack-a-Punch</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s2-body" role="region" aria-labelledby="s2-btn">
+      <p>Survive until Round 5 or 6. Completing the dog round automatically teleports you to <span class="inline-tag">Past</span> Nuke Town.</p>
+      <p>In the Past, bring your Truck Keys to the truck and hold interact to move it. This opens the Trinity Avenue section of the map.</p>
+      <p>Shoot the <strong>four Space-Time Knots</strong> floating around the Pack-a-Punch. Each shot spawns purple-eyed zombies tethered to that knot — kill them all to destroy it. Repeat for all four.</p>
+      <div class="callout green"><strong>Pack-a-Punch Is Now Live</strong>Upgrade your weapons whenever you have the Essence. You will need upgraded weapons for the rest of the egg.</div>
+      <button class="check-btn" onclick="markDone('s2')" aria-label="Mark Step 2 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="blundergat">
+    <h2>Build the Blundergat</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+  <p class="section-intro">All four parts can be collected in any order. The humming cyst and mannequin can sometimes be found before Pack-a-Punch if you get lucky early.</p>
+
+  <article class="step-card" id="s3">
+    <button class="step-header" onclick="toggleStep('s3')" aria-expanded="false" aria-controls="s3-body" id="s3-btn">
+      <span class="step-num" aria-hidden="true">3</span>
+      <span class="step-title">Part 1 — Barrel: Find the Ringing Cyst</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s3-body" role="region" aria-labelledby="s3-btn">
+      <p>Walk around <span class="inline-tag">Destroyed</span> Nuke Town listening for a yellow Loot Cyst making a special humming or ringing sound. When you find it, kill zombies near it to feed it souls. Once full, it drops the <strong>Barrel</strong>.</p>
+      <div class="callout"><strong>Can't Find It?</strong>It may be in Trinity Avenue, which opens after Pack-a-Punch. Fill all other cysts anyway — they drop useful loot regardless.</div>
+      <button class="check-btn" onclick="markDone('s3')" aria-label="Mark Step 3 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s4">
+    <button class="step-header" onclick="toggleStep('s4')" aria-expanded="false" aria-controls="s4-body" id="s4-btn">
+      <span class="step-num" aria-hidden="true">4</span>
+      <span class="step-title">Part 2 — Hammer: Pour Acid on the Ringing Mannequin</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s4-body" role="region" aria-labelledby="s4-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, walk the map and listen for a mannequin making the same humming sound. Check the Yellow House, Green House, and Trinity Avenue. Remember its location — do not interact yet.</p>
+      <p>Switch to <span class="inline-tag">Past</span> Nuke Town, go to that same mannequin, and hold interact to pour the acid vial on its head. A twin quote confirms the correct mannequin.</p>
+      <p>Return to <span class="inline-tag">Destroyed</span> — the <strong>Hammer</strong> will be on the floor at that spot.</p>
+      <div class="callout"><strong>Wrong Mannequin?</strong>You get three attempts. Refill the vial at the Green House sink and try another mannequin.</div>
+      <button class="check-btn" onclick="markDone('s4')" aria-label="Mark Step 4 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s5">
+    <button class="step-header" onclick="toggleStep('s5')" aria-expanded="false" aria-controls="s5-body" id="s5-btn">
+      <span class="step-num" aria-hidden="true">5</span>
+      <span class="step-title">Part 3 — Stock: Find Ringing Wall &amp; Blow It Open</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s5-body" role="region" aria-labelledby="s5-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, listen for a wall with black goo making the ringing sound. It spawns in one of three spots:</p>
+      <ul>
+        <li>Top of the stairs in the Green House, right side</li>
+        <li>Inside the Yellow House garage</li>
+        <li>Trinity Avenue corridor on the right side when entering</li>
+      </ul>
+      <p>Memorize the spot, then go to <span class="inline-tag">Past</span> and throw an explosive at that exact wall location to blow it open.</p>
+      <p>Return to <span class="inline-tag">Destroyed</span> — the wall now has a hole. Interact with it to collect the <strong>Stock</strong>.</p>
+      <button class="check-btn" onclick="markDone('s5')" aria-label="Mark Step 5 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s6">
+    <button class="step-header" onclick="toggleStep('s6')" aria-expanded="false" aria-controls="s6-body" id="s6-btn">
+      <span class="step-num" aria-hidden="true">6</span>
+      <span class="step-title">Part 4 — Sealant: Yellow House Shelf (Fixed Location)</span>
+      <span class="step-tag tag-past" aria-label="Past Nuke Town">Past</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s6-body" role="region" aria-labelledby="s6-btn">
+      <p>Go to <span class="inline-tag">Past</span> Nuke Town. Head upstairs in the Yellow House to the fourth room with a large window. Pick up the <strong>Sealant</strong> from the bottom-left corner of the shelf.</p>
+      <div class="callout green"><strong>Easiest Part</strong>Fixed location — always in the same spot. Grab it any time after Pack-a-Punch is unlocked.</div>
+      <button class="check-btn" onclick="markDone('s6')" aria-label="Mark Step 6 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s7">
+    <button class="step-header" onclick="toggleStep('s7')" aria-expanded="false" aria-controls="s7-body" id="s7-btn">
+      <span class="step-num" aria-hidden="true">7</span>
+      <span class="step-title">Craft the Blundergat at the Truck Workbench</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s7-body" role="region" aria-labelledby="s7-btn">
+      <p>Go to <span class="inline-tag">Destroyed</span>. Find the <strong>truck in the center of the Cul-de-Sac</strong> and head inside to the workbench.</p>
+      <p><strong>Melee the crafting bench first</strong> to open the flap, then hold interact to place your parts and craft the Blundergat.</p>
+      <div class="callout"><strong>Melee the Bench First — This Is Required</strong>The bench will not show an interact prompt until after you melee it. This catches many players off guard.</div>
+      <button class="check-btn" onclick="markDone('s7')" aria-label="Mark Step 7 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="sundergat">
+    <h2>Upgrade to Sundergat</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s8">
+    <button class="step-header" onclick="toggleStep('s8')" aria-expanded="false" aria-controls="s8-body" id="s8-btn">
+      <span class="step-num" aria-hidden="true">8</span>
+      <span class="step-title">Lead 3 Tortured Zombies to the Crafting Bench</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s8-body" role="region" aria-labelledby="s8-btn">
+      <p>Spend a full round in <span class="inline-tag">Destroyed</span>. At the start of the next round, a <strong>Tortured Zombie</strong> spawns inside a fire tornado in the Yellow House backyard, Green House backyard, or Trinity Avenue.</p>
+      <p>Walk near it to release it. It will try to <strong>tether to nearby zombies</strong> using a fire chain that drains its health. Kill any purple-eyed zombies it tethers to — keep the main Tortured Zombie alive the entire time.</p>
+      <p>Lead it to the crafting bench in the truck and <strong>kill it with the Blundergat right in front of the bench</strong>. Its soul is absorbed. Repeat for a second Tortured Zombie the next round, then a <strong>Shock Mimic</strong> on the third round (same process, slightly more health).</p>
+      <div class="callout"><strong>Must Use the Blundergat</strong>Any other weapon will not count. The kill must happen directly in front of the bench.</div>
+      <div class="callout green"><strong>Solo Tip</strong>Thin the round to 1 or 2 zombies before approaching the tornado. Fewer zombies to tether to.</div>
+      <button class="check-btn" onclick="markDone('s8')" aria-label="Mark Step 8 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s9">
+    <button class="step-header" onclick="toggleStep('s9')" aria-expanded="false" aria-controls="s9-body" id="s9-btn">
+      <span class="step-num" aria-hidden="true">9</span>
+      <span class="step-title">Place Blundergat in Past Bench → Collect Sundergat in Destroyed</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s9-body" role="region" aria-labelledby="s9-btn">
+      <p>After all three souls are absorbed, travel to <span class="inline-tag">Past</span> Nuke Town. Go to the crafting bench, <strong>melee it open</strong>, and place your Blundergat inside.</p>
+      <p>Return to <span class="inline-tag">Destroyed</span>, melee the bench open again, and pick up your <strong>Sundergat</strong>.</p>
+      <div class="callout green"><strong>Pack-a-Punch It Now</strong>The Sundergat is required for all remaining escort steps — Sundergat kills are the only way to move soul boxes toward their destinations.</div>
+      <button class="check-btn" onclick="markDone('s9')" aria-label="Mark Step 9 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="twins">
+    <h2>Summon the Twins</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s10">
+    <button class="step-header" onclick="toggleStep('s10')" aria-expanded="false" aria-controls="s10-body" id="s10-btn">
+      <span class="step-num" aria-hidden="true">10</span>
+      <span class="step-title">RC-XD Remote → Blow Garage Door → Collect Chalk</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s10-body" role="region" aria-labelledby="s10-btn">
+      <p>Find the RC-XD remote in one of three spots in <span class="inline-tag">Destroyed</span>:</p>
+      <ul>
+        <li>Yellow House garage — bottom or broken shelf</li>
+        <li>Green House backyard — back corner of the soil pile</li>
+        <li>Trinity Avenue — near the crates beside Pack-a-Punch</li>
+      </ul>
+      <p>Holding interact starts the RC car mini-game. Drive this path: <strong>up the first ramp, across, up the second ramp, jump over the fence, through the gap, then detonate beside the barrel</strong> near the garage door on Trinity Avenue.</p>
+      <p>The garage opens. Head inside, interact with the kneeling body to make it fade (pick up the head on the safe), then wait a moment for <strong>Chalk</strong> to appear on the ground.</p>
+      <div class="callout"><strong>RC Car Tips</strong>Keep steady momentum before the ramp and jump early. If you fail, find another controller next round. It may not spawn until Round 8.</div>
+      <button class="check-btn" onclick="markDone('s10')" aria-label="Mark Step 10 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s11">
+    <button class="step-header" onclick="toggleStep('s11')" aria-expanded="false" aria-controls="s11-body" id="s11-btn">
+      <span class="step-num" aria-hidden="true">11</span>
+      <span class="step-title">Repair Swing Set → Place Chalk → Spawn the Twins</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s11-body" role="region" aria-labelledby="s11-btn">
+      <p>In <span class="inline-tag">Past</span>, go to the swing set in the Yellow House backyard. <strong>Melee or shoot the swing seat</strong> to knock it off. Pick it up from the ground.</p>
+      <p>Return to <span class="inline-tag">Destroyed</span> and interact with the swing set to replace the seat. Then hold interact again to <strong>place the Chalk</strong> on top of the swing set.</p>
+      <p>The Twins appear in a short sequence. Once their dialogue ends, all remaining Easter egg steps are unlocked.</p>
+      <div class="callout green"><strong>After This Point</strong>Irradiated Seeds become available in the Yellow House garage, and the Piano Teacher can begin spawning. Steps 12 through 15 can be done in any order.</div>
+      <button class="check-btn" onclick="markDone('s11')" aria-label="Mark Step 11 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s12">
+    <button class="step-header" onclick="toggleStep('s12')" aria-expanded="false" aria-controls="s12-body" id="s12-btn">
+      <span class="step-num" aria-hidden="true">12</span>
+      <span class="step-title">Collect the Goggles: Shoot Speaker Pylon + Use Wisp Tea</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s12-body" role="region" aria-labelledby="s12-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, go to the left of Pack-a-Punch and find the <strong>wooden telephone pole or speaker pylon</strong>. Shoot the very top of it until the Goggles fall off outside the map boundary.</p>
+      <p>Purchase the <strong>Wisp Tea perk</strong> (perk locations are randomized — check both versions or use Wonderfizz). Once your Wisp is active, walk near the fallen Goggles and your Wisp automatically carries them into the play area for you to pick up.</p>
+      <div class="callout"><strong>Wisp Tea Is Required</strong>You cannot pick up the Goggles yourself. Buy the perk before attempting this step.</div>
+      <button class="check-btn" onclick="markDone('s12')" aria-label="Mark Step 12 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s13">
+    <button class="step-header" onclick="toggleStep('s13')" aria-expanded="false" aria-controls="s13-body" id="s13-btn">
+      <span class="step-num" aria-hidden="true">13</span>
+      <span class="step-title">Find the Headset (Death Perception Required)</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s13-body" role="region" aria-labelledby="s13-btn">
+      <p><strong>You must have Death Perception equipped</strong> to see and pick up the Headset. Buy it from a perk machine or Wonderfizz, then check these locations in <span class="inline-tag">Destroyed</span>:</p>
+      <ul>
+        <li>Yellow House backyard — in the mannequin's hand near the perk machine spawn</li>
+        <li>Green House second floor — on the wall hooks or rack</li>
+        <li>Near the garbage can by the fence in the Cul-de-Sac</li>
+      </ul>
+      <button class="check-btn" onclick="markDone('s13')" aria-label="Mark Step 13 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s14">
+    <button class="step-header" onclick="toggleStep('s14')" aria-expanded="false" aria-controls="s14-body" id="s14-btn">
+      <span class="step-num" aria-hidden="true">14</span>
+      <span class="step-title">Place Goggles &amp; Headset in the Toy Box</span>
+      <span class="step-tag tag-past" aria-label="Past Nuke Town">Past</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s14-body" role="region" aria-labelledby="s14-btn">
+      <p>In <span class="inline-tag">Past</span> Nuke Town, find the <strong>Toy Box at the entrance of Trinity Avenue</strong>. Hold interact to open it, then place both the Goggles and the Headset inside.</p>
+      <div class="callout green"><strong>Unlocks the Four Square Ball</strong>The red ball for Four Square will now appear in Destroyed Nuke Town, needed for Step 17.</div>
+      <button class="check-btn" onclick="markDone('s14')" aria-label="Mark Step 14 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header">
+    <h2>Plant the Tree &amp; Light the Fire</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s15">
+    <button class="step-header" onclick="toggleStep('s15')" aria-expanded="false" aria-controls="s15-body" id="s15-btn">
+      <span class="step-num" aria-hidden="true">15</span>
+      <span class="step-title">Seeds, Plant, Feed Souls, Chop Logs, Light the Fireplace</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s15-body" role="region" aria-labelledby="s15-btn">
+      <p><strong>Get Seeds:</strong> In <span class="inline-tag">Destroyed</span>, go to the Yellow House garage and crouch in front of the red box on the shelf. Hold interact to collect the <strong>Irradiated Seeds</strong>. Only available after Step 11.</p>
+      <p><strong>Plant the Tree:</strong> In <span class="inline-tag">Past</span>, find the <strong>soil pit to the left of Pack-a-Punch</strong> in Trinity Avenue. Hold interact to plant. A glowing green plant appears.</p>
+      <p><strong>Feed Souls:</strong> Kill zombies near the plant with the <strong>Blundergat or Sundergat</strong> to feed it roughly 50 souls. Your screen flashes white when complete.</p>
+      <p><strong>Chop the Tree:</strong> In <span class="inline-tag">Destroyed</span>, the tree is now enormous. Throw <strong>3 Tomahawks</strong> at it to get 3 pieces of Strange Firewood. Buy Tomahawks at the crafting bench or shoot purple crystals to find them.</p>
+      <p><strong>Light the Fire:</strong> In <span class="inline-tag">Past</span>, place the firewood in the <strong>Yellow House fireplace</strong> on the first floor. Throw a <strong>Molotov</strong> to ignite it. A completion quote confirms success.</p>
+      <div class="callout green"><strong>After This Step</strong>A white X appears in Trinity Avenue in Destroyed. Standing on it triggers Hopscotch in Step 16.</div>
+      <button class="check-btn" onclick="markDone('s15')" aria-label="Mark Step 15 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="children">
+    <h2>Children's Games</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+  <p class="section-intro">Three games: Hopscotch, Four Square, and Jacks. They can be worked on across rounds in any order. Each soul box requires <span class="inline-tag">Sundergat</span> kills to escort.</p>
+
+  <article class="step-card" id="s16">
+    <button class="step-header" onclick="toggleStep('s16')" aria-expanded="false" aria-controls="s16-body" id="s16-btn">
+      <span class="step-num" aria-hidden="true">16</span>
+      <span class="step-title">Hopscotch → Escort Music Box to the Fireplace</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s16-body" role="region" aria-labelledby="s16-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, find the <strong>white X on the ground in Trinity Avenue</strong> near Pack-a-Punch. Stand on it until it glows blue and stays lit after you step away. Then <strong>immediately run to the Temporal Conduit</strong> and teleport to Past.</p>
+      <p>In <span class="inline-tag">Past</span>, the Twins draw a Hopscotch grid in the Trinity Avenue west area. Interact with the orb at square 1 to enter third-person mode and begin.</p>
+      <p><strong>How to play:</strong> Jump from square 1 through 12 in order, then back from 12 to 1. A black square moves along the tiles — <strong>never land on it</strong>. Take a half-second pause between each jump. Accuracy matters more than speed.</p>
+      <p><strong>Black square tip:</strong> Watch it cross squares 6 and 7, then time your jump to hop over it. Follow behind it on the return trip from 12.</p>
+      <div class="callout"><strong>Failed?</strong>Wait about 60 seconds and interact to retry. The grid will reset.</div>
+      <p>Success spawns a <strong>glowing gold Music Box</strong>. Get kills with the <strong>Sundergat</strong> near it to escort it. It travels through the Yellow House backyard and kitchen before landing on the <strong>Yellow House fireplace</strong>. A Max Ammo drop confirms completion.</p>
+      <button class="check-btn" onclick="markDone('s16')" aria-label="Mark Step 16 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s17">
+    <button class="step-header" onclick="toggleStep('s17')" aria-expanded="false" aria-controls="s17-body" id="s17-btn">
+      <span class="step-num" aria-hidden="true">17</span>
+      <span class="step-title">Four Square → Escort Soul Box to the Toy Box</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s17-body" role="region" aria-labelledby="s17-btn">
+      <p><strong>Step 14 must be complete before this step.</strong></p>
+      <p>In <span class="inline-tag">Destroyed</span>, find the <strong>red ball</strong> — it phases in and out of visibility, so look carefully — in one of three spots:</p>
+      <ul>
+        <li>On top of the Yellow House roof on the Trinity Avenue side</li>
+        <li>On top of stacked ammo crates or wooden boxes in Trinity Avenue</li>
+        <li>In the Yellow House backyard on top of a pillar</li>
+      </ul>
+      <p>Shoot the ball down, then push it with a <strong>bullet weapon</strong> all the way to the <strong>white X in the Green House backyard</strong>. The X glows when the ball is in place.</p>
+      <p>Teleport to <span class="inline-tag">Past</span>. The Twins draw a Four Square grid. Interact with the ball to start. <strong>Melee the ball</strong> into an adjacent square — it must bounce into a different square each time. Never let it bounce in the same square twice.</p>
+      <p><strong>Solo:</strong> Run to the opposite square after each hit. <strong>Co-op:</strong> Position a teammate to melee it back. Solo takes about 15 seconds; co-op about 30.</p>
+      <div class="callout"><strong>Failed?</strong>Wait about 60 seconds and retry. Ether Shroud is great for keeping zombies off you during this game.</div>
+      <p>Success spawns a soul box. Escort it with <strong>Sundergat kills</strong> to the <strong>Toy Box in Trinity Avenue</strong>. Max Ammo confirms completion.</p>
+      <button class="check-btn" onclick="markDone('s17')" aria-label="Mark Step 17 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="piano">
+    <h2>Piano Teacher &amp; Symbol Puzzle</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s18">
+    <button class="step-header" onclick="toggleStep('s18')" aria-expanded="false" aria-controls="s18-body" id="s18-btn">
+      <span class="step-num" aria-hidden="true">18</span>
+      <span class="step-title">Spawn &amp; Charm the Piano Teacher Zombie</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s18-body" role="region" aria-labelledby="s18-btn">
+      <p>After Step 11, a special Piano Teacher zombie can spawn in <span class="inline-tag">Destroyed</span>. <strong>Hang around the Green House backyard</strong> — she may appear near the back-left archway or wander out into the yard. She moves slowly and looks different from regular zombies. Wait up to two full minutes.</p>
+      <div class="callout"><strong>Do Not Kill Her</strong>She must reach the piano alive. If she does not spawn, go to the next round and stay in the Green House backyard for the full round.</div>
+      <p>Once she spawns, throw a <strong>Psych Grenade at her</strong> (or use Brain Rot on your weapon). She will run into the Green House and stand at the piano.</p>
+      <p>While she is at the piano, <strong>immediately teleport to Past</strong>. Go to the Green House — she will be at the piano there too. She plays briefly, then explodes. The piano glows yellow, confirming success.</p>
+      <div class="callout green"><strong>Unlocks the 8 Musical Symbols</strong>Blue symbol notes now appear around Destroyed Nuke Town. Required for the piano step and for Jacks to become available.</div>
+      <button class="check-btn" onclick="markDone('s18')" aria-label="Mark Step 18 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s19">
+    <button class="step-header" onclick="toggleStep('s19')" aria-expanded="false" aria-controls="s19-body" id="s19-btn">
+      <span class="step-num" aria-hidden="true">19</span>
+      <span class="step-title">Find All 8 Symbols and Interact in Blink Order</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s19-body" role="region" aria-labelledby="s19-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, find all 8 glowing blue symbols. <strong>Count how many times each blinks before pausing</strong> — do not interact yet. Write them down. Then interact with them starting with the one that blinks once, then twice, all the way up to the one that blinks eight times.</p>
+      <p>All 8 possible spawn locations:</p>
+      <ul>
+        <li>Back fence of the Yellow House backyard</li>
+        <li>Side of the school bus in the Cul-de-Sac</li>
+        <li>Back of the bunker in the Green House backyard</li>
+        <li>Main Nuke Town center fence, facing east</li>
+        <li>Trinity Avenue left side, near the mailbox</li>
+        <li>Trinity Avenue right side corridor</li>
+        <li>Trinity Avenue further right side, near a front door</li>
+        <li>Trinity Avenue far back, behind the rock near Pack-a-Punch</li>
+      </ul>
+      <div class="callout"><strong>Cannot Interact With Symbols?</strong>You have not finished feeding the tree in Step 15. Get more Sundergat kills near the plant until the screen flashes white, then return.</div>
+      <div class="callout"><strong>Made a Mistake?</strong>Go to the next round — the symbols reset for another attempt.</div>
+      <button class="check-btn" onclick="markDone('s19')" aria-label="Mark Step 19 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s20">
+    <button class="step-header" onclick="toggleStep('s20')" aria-expanded="false" aria-controls="s20-body" id="s20-btn">
+      <span class="step-num" aria-hidden="true">20</span>
+      <span class="step-title">Play the Piano — Same Notes Every Game</span>
+      <span class="step-tag tag-past" aria-label="Past Nuke Town">Past</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s20-body" role="region" aria-labelledby="s20-btn">
+      <p>Go to <span class="inline-tag">Past</span> Nuke Town and find the <strong>piano on the ground floor of the Green House</strong>. Interact with it and play these 8 notes in this exact order — they are the same in every game:</p>
+      <p class="piano-notes" aria-label="Piano note sequence: A, F, G, E, F, E, C, E">A — F — G — E — F — E — C — E</p>
+      <p>The keys are labeled 1 through 8 on screen when you interact. Follow them in order.</p>
+      <div class="callout"><strong>Wrong Notes?</strong>Interact again after about 30 seconds and retry.</div>
+      <div class="callout green"><strong>Activates Floating Zombies</strong>Success triggers zombies to float outside the map boundary in Destroyed — you need these for the Jacks game in Step 21.</div>
+      <button class="check-btn" onclick="markDone('s20')" aria-label="Mark Step 20 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="jacks">
+    <h2>Jacks</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s21">
+    <button class="step-header" onclick="toggleStep('s21')" aria-expanded="false" aria-controls="s21-body" id="s21-btn">
+      <span class="step-num" aria-hidden="true">21</span>
+      <span class="step-title">Shoot 3 Floating Zombies → Play Jacks → Escort Sheet Music</span>
+      <span class="step-tag tag-both" aria-label="Both versions">Both</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s21-body" role="region" aria-labelledby="s21-btn">
+      <p>In <span class="inline-tag">Destroyed</span>, look around the outer edges of the map for zombies <strong>floating sideways in the air outside the perimeter</strong>. Shoot 3 of them — their souls fly toward a new <strong>white X in Trinity Avenue</strong>.</p>
+      <p>Teleport to <span class="inline-tag">Past</span> and interact with the orb at the X to start Jacks.</p>
+      <p><strong>How to play:</strong> A ball bounces and launches zombies into the air with each bounce. <strong>Kill all airborne zombies before the ball hits the ground.</strong> They die in one hit. Aim quickly and line up shots. Repeat for 4 to 6 waves.</p>
+      <div class="callout"><strong>No Explosives Near the Ball</strong>Any explosive hit to the ball immediately fails the step. Use the Sundergat or a bullet weapon only.</div>
+      <div class="callout"><strong>Failed?</strong>Wait 60 seconds and interact to retry.</div>
+      <p>Success spawns a <strong>Musical Sheet</strong> soul box. Escort it with <strong>Sundergat kills</strong> — it travels through the Green House and ends at the <strong>Green House piano</strong>. Screen flashes white on completion.</p>
+      <button class="check-btn" onclick="markDone('s21')" aria-label="Mark Step 21 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="clock">
+    <h2>The Clock &amp; Boss Trigger</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+
+  <article class="step-card" id="s22">
+    <button class="step-header" onclick="toggleStep('s22')" aria-expanded="false" aria-controls="s22-body" id="s22-btn">
+      <span class="step-num" aria-hidden="true">22</span>
+      <span class="step-title">Set Roof Clock to 00:00 → Shoot Red Hand While Teleporting</span>
+      <span class="step-tag tag-dest" aria-label="Destroyed Nuke Town">Destroyed</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s22-body" role="region" aria-labelledby="s22-btn">
+      <p>Get to a high position in <span class="inline-tag">Destroyed</span> to access the <strong>large clock on the roof of the Green House</strong>. Shoot the <strong>white hand</strong> to the 12 o'clock position, then shoot the <strong>red hand</strong> to 12 o'clock as well. Both must be at zero.</p>
+      <p>Now: <strong>Activate the teleport to Past</strong>. During the animation, before it completes, <strong>shoot the red hand one more time</strong> — moving it just past 12 o'clock.</p>
+      <p>If timed correctly, you arrive in Past with a sound cue. A soul orb appears — follow it to the piano, the toy box, the fireplace, and finally to the <strong>swing set in the Yellow House backyard</strong> where it glows yellow.</p>
+      <div class="callout gold"><strong>Last Prep Before Boss</strong>All three soul box escorts (Steps 16, 17, 21) must be done. Pack-a-Punch tier three. Full armor. Best gobble gums equipped. Boss fight is next.</div>
+      <button class="check-btn" onclick="markDone('s22')" aria-label="Mark Step 22 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card" id="s23">
+    <button class="step-header" onclick="toggleStep('s23')" aria-expanded="false" aria-controls="s23-body" id="s23-btn">
+      <span class="step-num" aria-hidden="true">23</span>
+      <span class="step-title">Follow Twin Orbs → Interact With Swing Set to Vote</span>
+      <span class="step-tag tag-past" aria-label="Past Nuke Town">Past</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s23-body" role="region" aria-labelledby="s23-btn">
+      <p>In <span class="inline-tag">Past</span>, follow the blue orbs as the Twins take you to three locations. You only need to follow and listen — no actions required.</p>
+      <p>The final stop is the <strong>swing set in the Yellow House backyard</strong>. Interact with the yellow orb to <strong>vote to start the boss fight</strong>.</p>
+      <div class="callout gold"><strong>Point of No Return</strong>Once you vote, the boss fight begins and you cannot go back. Triple Pack-a-Punch your weapons, fill all armor plates, and have Kazmirs, Monkey Bombs, and Ether Shroud charges ready.</div>
+      <button class="check-btn" onclick="markDone('s23')" aria-label="Mark Step 23 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <div class="section-header" id="boss">
+    <h2>Boss Fight — The Dark Heart</h2>
+    <div class="section-line" aria-hidden="true"></div>
+  </div>
+  <p class="section-intro">Three active locations throughout all phases: <strong>Trinity Avenue</strong>, <strong>Yellow House Backyard</strong>, and <strong>Green House Backyard</strong>.</p>
+
+  <article class="step-card warn-card" id="s24">
+    <button class="step-header" onclick="toggleStep('s24')" aria-expanded="false" aria-controls="s24-body" id="s24-btn">
+      <span class="step-num" aria-hidden="true">24</span>
+      <span class="step-title">Phase 1 — Feed Cysts, Defend Concentration Fields, Deal Damage</span>
+      <span class="step-tag tag-boss" aria-label="Boss fight phase">Boss</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s24-body" role="region" aria-labelledby="s24-btn">
+      <div class="phase-block phase-1">
+        <span class="phase-label">Cyst Mechanic</span>
+        <p>Yellow Cysts guard black blobs at each of the three locations. Kill 8 to 10 zombies near each cyst to fill it with souls. When full, the blob is destroyed and an artifact is revealed. Do this at all three locations.</p>
+      </div>
+      <div class="phase-block phase-1">
+        <span class="phase-label">Concentration Field Defense</span>
+        <p>A blue field spawns at one artifact location. Defend it from zombies — if it reaches zero health, the defense restarts. Use Kazmirs, Monkey Bombs, or the Blundergat. The orb moves to the next location when done. Follow it for two more defenses — three total.</p>
+      </div>
+      <div class="phase-block phase-1">
+        <span class="phase-label">Damage Phase</span>
+        <p>The Dark Heart is now vulnerable. Shoot only its <strong>bright glowing spots</strong> — everything else is immune. Reduce it to about one-third health to trigger Phase 2.</p>
+      </div>
+      <button class="check-btn" onclick="markDone('s24')" aria-label="Mark Step 24 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card warn-card" id="s25">
+    <button class="step-header" onclick="toggleStep('s25')" aria-expanded="false" aria-controls="s25-body" id="s25-btn">
+      <span class="step-num" aria-hidden="true">25</span>
+      <span class="step-title">Phase 2 — Shoot Yellow Orbs, Defend, Damage (Meteors Active)</span>
+      <span class="step-tag tag-boss" aria-label="Boss fight phase">Boss</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s25-body" role="region" aria-labelledby="s25-btn">
+      <div class="phase-block phase-2">
+        <span class="phase-label">Orb Mechanic</span>
+        <p>Yellow orbs shoot down zombies tethered to the black blobs. Shoot each orb to spawn those zombies, then kill them to destroy the blob. Same as the Pack-a-Punch step. Repeat at all three locations.</p>
+      </div>
+      <div class="phase-block phase-2">
+        <span class="phase-label">New Hazard — Meteors and Fire Tornadoes</span>
+        <p>Orange circles on the ground mark incoming meteor strikes — dodge them. Fire tornadoes drain your armor and slow your movement rapidly. They are more dangerous than the meteors. Keep moving at all times.</p>
+      </div>
+      <div class="phase-block phase-2">
+        <span class="phase-label">Concentration Fields and Damage</span>
+        <p>Three more defenses, same pattern as Phase 1 but Rad-Hounds join in. You receive Max Armor and Max Ammo after each health-bar third. The boss moves faster this phase — lead your shots.</p>
+      </div>
+      <button class="check-btn" onclick="markDone('s25')" aria-label="Mark Step 25 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <article class="step-card warn-card" id="s26">
+    <button class="step-header" onclick="toggleStep('s26')" aria-expanded="false" aria-controls="s26-body" id="s26-btn">
+      <span class="step-num" aria-hidden="true">26</span>
+      <span class="step-title">Phase 3 — Escort Tortured Zombies to Blobs, Then Final Damage</span>
+      <span class="step-tag tag-boss" aria-label="Boss fight phase">Boss</span>
+      <span class="step-chevron" aria-hidden="true">▼</span>
+    </button>
+    <div class="step-body" id="s26-body" role="region" aria-labelledby="s26-btn">
+      <div class="phase-block phase-3">
+        <span class="phase-label">Tortured Zombie Mechanic</span>
+        <p>A Tortured Zombie spawns in the center. Clear nearby zombies, then escort it toward a black blob. Watch for a <strong>yellow tether connecting it to the blob</strong>. Once the tether appears, shoot the Tortured Zombie to destroy the blob. It respawns — repeat at all three locations.</p>
+      </div>
+      <div class="callout"><strong>Do Not Kill It Before It Tethers</strong>The Tortured Zombie must be actively tethered to the blob before you shoot it. Killing it early is a significant setback.</div>
+      <div class="phase-block phase-3">
+        <span class="phase-label">Final Concentration Fields and Damage</span>
+        <p>Three final defenses. Then the Dark Heart spins rapidly, making weak spots hard to track. Use all remaining equipment. The Blundergat deals excellent damage but requires accurate aim. Keep moving — fire tornadoes and meteors are at their most dangerous here.</p>
+      </div>
+      <div class="callout green"><strong>Boss Defeated — Easter Egg Complete</strong>The ending cutscene plays. Rewards: Main Quest Complete Calling Card and a unique Blundergat weapon skin.</div>
+      <button class="check-btn" onclick="markDone('s26')" aria-label="Mark Step 26 complete">&#10003; Mark Complete</button>
+    </div>
+  </article>
+
+  <section id="credits" aria-labelledby="credits-heading">
+    <h2 id="credits-heading">Guide Sources</h2>
+    <nav class="credit-links" aria-label="Source videos">
+      <a href="https://youtu.be/LpOssxFKx9I" target="_blank" rel="noopener noreferrer">
+        Ch0pper — Ultimate Solo Easter Egg Guide<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+      <a href="https://youtu.be/d55f7C4fXqA" target="_blank" rel="noopener noreferrer">
+        MrRoflWaffles — No-Nonsense Easter Egg Guide<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+      <a href="https://youtu.be/Bw9dW8PyFHw" target="_blank" rel="noopener noreferrer">
+        MrDalekJD — Full Easter Egg Tutorial<span class="visually-hidden"> (opens in new tab)</span>
+      </a>
+    </nav>
+    <p>Community-compiled guide. Call of Duty: Black Ops 7 — Paradox Junction (Season 2 Reloaded, March 2026)</p>
+  </section>
+
+</main>
+
+<style>
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+</style>
+
+<script>
+  function toggleStep(id) {
+    const card = document.getElementById(id);
+    const btn  = card.querySelector('.step-header');
+    const isOpen = card.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+
+  function markDone(id) {
+    const card    = document.getElementById(id);
+    const btn     = card.querySelector('.step-header');
+    const checkBtn = card.querySelector('.check-btn');
+    card.classList.remove('open');
+    btn.setAttribute('aria-expanded', 'false');
+    const isDone = card.classList.toggle('done');
+    const num = id.replace('s','');
+    checkBtn.textContent = isDone ? '\u21A9 Mark Incomplete' : '\u2713 Mark Complete';
+    checkBtn.setAttribute('aria-label', isDone
+      ? 'Mark Step ' + num + ' incomplete'
+      : 'Mark Step ' + num + ' complete');
+    updateCounter();
+  }
+
+  const allSteps = document.querySelectorAll('.step-card');
+  document.getElementById('total-count').textContent = allSteps.length;
+
+  function updateCounter() {
+    const done = document.querySelectorAll('.step-card.done').length;
+    document.getElementById('done-count').textContent = done;
+  }
+
+  document.querySelectorAll('.step-header').forEach(function(btn) {
+    btn.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        btn.click();
+      }
+    });
+  });
+
+  window.addEventListener('scroll', function() {
+    var scrollTop = window.scrollY;
+    var docH = document.documentElement.scrollHeight - window.innerHeight;
+    if (docH > 0) {
+      document.getElementById('progress-bar').style.width = (scrollTop / docH * 100) + '%';
+    }
+  }, { passive: true });
+</script>
+</body>
+</html>
