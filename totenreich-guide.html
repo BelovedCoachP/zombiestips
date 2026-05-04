@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Totenreich Easter Egg Guide | Black Ops 7 Zombies | ZombiesTips</title>
+<meta name="description" content="Step-by-step Totenreich main Easter egg guide for Black Ops 7 Zombies. Wonder weapon, Wonder Signal, Atomcraft Core, and boss fight. Solo and co-op compatible.">
+<style>
+/* ============================================================
+   COLORS - all verified WCAG 2.1 AA (4.5:1 minimum)
+   --green  14.76:1 | --gold  14.12:1 | --text  16.14:1
+   --blue    5.72:1 | --red    5.66:1 | --muted  7.57:1
+   ============================================================ */
+:root {
+  --bg:     #0a0a0a;
+  --bg2:    #111111;
+  --bg3:    #181818;
+  --border: #333333;
+  --green:  #00ff88;
+  --red:    #ff4466;
+  --gold:   #ffd700;
+  --blue:   #6699ff;
+  --text:   #e8e8e8;
+  --muted:  #a0a0a0;
+  --focus:  #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  padding: 0;
+}
+
+/* Skip link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--green);
+  color: var(--bg);
+  padding: 0.75rem 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  z-index: 1000;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Layout */
+.container {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 4rem;
+}
+
+header.page-header {
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.back-link {
+  display: inline-block;
+  color: var(--blue);
+  text-decoration: underline;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+.back-link:hover { color: var(--green); }
+.back-link:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin: 0.5rem 0 0.5rem;
+  color: var(--green);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 1.05rem;
+  margin: 0;
+}
+
+.meta-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+.meta-tag {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 0.4rem 0.8rem;
+  font-size: 0.95rem;
+  color: var(--text);
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* Progress counter */
+.progress-bar {
+  position: sticky;
+  top: 0;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  padding: 0.85rem 1.25rem;
+  margin-bottom: 2rem;
+  z-index: 100;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.progress-text {
+  font-size: 1rem;
+  font-weight: 500;
+}
+.progress-count {
+  color: var(--green);
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.reset-btn {
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 500;
+  min-height: 44px;
+}
+.reset-btn:hover { color: var(--text); border-color: var(--muted); }
+.reset-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* Section headings */
+h2 {
+  color: var(--gold);
+  font-size: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+
+h3 {
+  color: var(--text);
+  font-size: 1.15rem;
+  margin: 1.25rem 0 0.5rem;
+  font-weight: 700;
+}
+
+p { margin: 0 0 1rem; }
+ul, ol { margin: 0 0 1rem; padding-left: 1.5rem; }
+li { margin-bottom: 0.4rem; }
+
+a {
+  color: var(--blue);
+  text-decoration: underline;
+}
+a:hover { color: var(--green); }
+a:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Tip cards */
+.tip-card {
+  background: var(--bg3);
+  border-left: 4px solid var(--gold);
+  padding: 1rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 2px;
+}
+.tip-card.warning {
+  border-left-color: var(--red);
+}
+.tip-card.confirm {
+  border-left-color: var(--green);
+}
+.tip-card strong {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-size: 1rem;
+  font-weight: 700;
+}
+.tip-card.warning strong { color: var(--red); }
+.tip-card.confirm strong { color: var(--green); }
+.tip-card strong { color: var(--gold); }
+
+/* Loadout grid */
+.loadout-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.loadout-block {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 1rem 1.25rem;
+  border-radius: 2px;
+}
+.loadout-block h3 {
+  margin-top: 0;
+  color: var(--green);
+  font-size: 1.05rem;
+}
+.loadout-block ul {
+  margin: 0;
+  padding-left: 1.25rem;
+}
+
+/* Phase blocks */
+.phase {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 1.25rem 1.25rem 0.75rem;
+  margin: 1.5rem 0;
+  border-radius: 2px;
+}
+.phase h2 {
+  margin-top: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+  font-size: 1.4rem;
+}
+.phase-intro {
+  color: var(--muted);
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+/* Step cards */
+.step {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  margin-bottom: 0.75rem;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.step-header {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 500;
+  min-height: 44px;
+  line-height: 1.4;
+}
+.step-header:hover {
+  background: var(--bg3);
+}
+.step-header:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: -2px;
+}
+
+.step-number {
+  background: var(--bg);
+  color: var(--green);
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  flex-shrink: 0;
+  min-width: 2.5rem;
+  text-align: center;
+}
+
+.step-title {
+  flex: 1;
+}
+
+.step-toggle {
+  color: var(--muted);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  transition: transform 0.2s;
+}
+
+.step[aria-expanded="true"] .step-toggle,
+.step-header[aria-expanded="true"] .step-toggle {
+  transform: rotate(180deg);
+}
+
+.step-body {
+  padding: 0.5rem 1.25rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--border);
+}
+.step-body[hidden] { display: none; }
+
+.step-body p:first-child { margin-top: 1rem; }
+
+/* Step completion */
+.step.completed .step-header {
+  background: rgba(0, 255, 136, 0.04);
+}
+.step.completed .step-number {
+  background: var(--green);
+  color: var(--bg);
+  border-color: var(--green);
+}
+.step.completed .step-title {
+  color: var(--muted);
+}
+
+/* Mark complete button */
+.complete-btn {
+  background: transparent;
+  color: var(--green);
+  border: 1px solid var(--green);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 600;
+  margin-top: 1rem;
+  min-height: 44px;
+  border-radius: 2px;
+}
+.complete-btn:hover {
+  background: var(--green);
+  color: var(--bg);
+}
+.complete-btn:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+.step.completed .complete-btn {
+  color: var(--muted);
+  border-color: var(--muted);
+}
+.step.completed .complete-btn:hover {
+  background: var(--muted);
+  color: var(--bg);
+}
+
+/* Code-style inline notes */
+.kbd {
+  background: var(--bg);
+  color: var(--gold);
+  padding: 0.15rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  font-family: 'Consolas', 'Monaco', monospace;
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+/* Credits */
+.credits {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 2px solid var(--border);
+}
+.credits h2 {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.credits ul {
+  list-style: none;
+  padding-left: 0;
+}
+.credits li {
+  margin-bottom: 0.85rem;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--border);
+}
+.credits .creator {
+  color: var(--gold);
+  font-weight: 600;
+}
+
+footer {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.95rem;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .container { padding: 1rem 0.85rem 3rem; }
+  .step-header { padding: 0.85rem 1rem; gap: 0.6rem; }
+  .step-body { padding: 0.5rem 1rem 1rem; }
+  .progress-bar { padding: 0.75rem 1rem; }
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 1.3rem; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
+<div class="container">
+
+<header class="page-header">
+  <a href="index.html" class="back-link">&larr; Back to all guides</a>
+  <h1>Totenreich Easter Egg Guide</h1>
+  <p class="subtitle">Black Ops 7 Zombies | Main Easter Egg Walkthrough</p>
+  <div class="meta-bar" aria-label="Guide details">
+    <span class="meta-tag">Solo &amp; Co-op</span>
+    <span class="meta-tag">17 Steps</span>
+    <span class="meta-tag">Boss Fight</span>
+    <span class="meta-tag">Wonder Weapon Required</span>
+  </div>
+</header>
+
+<main id="main-content">
+
+<div class="progress-bar" role="region" aria-label="Step progress">
+  <span class="progress-text">
+    Progress: <span class="progress-count" aria-live="polite"><span id="completed-count">0</span> of 17</span> steps complete
+  </span>
+  <button type="button" class="reset-btn" id="reset-progress">Reset progress</button>
+</div>
+
+<section aria-labelledby="loadout-heading">
+<h2 id="loadout-heading">Recommended Loadout</h2>
+
+<p>The Totenreich quest does not lock any specific field upgrade or weapon, so build for the boss fight. You need consistent ranged damage and a good ad-clear option.</p>
+
+<div class="loadout-grid">
+  <div class="loadout-block">
+    <h3>Primary Weapon</h3>
+    <ul>
+      <li>Voyak KT3 (assault rifle, top pick)</li>
+      <li>Novaline (strong all-rounder)</li>
+      <li>Foie Gras AR (range build)</li>
+    </ul>
+  </div>
+  <div class="loadout-block">
+    <h3>Secondary</h3>
+    <ul>
+      <li>Akimbo 1911s (boss heads, ad clear)</li>
+      <li>Any wonder weapon you find</li>
+    </ul>
+  </div>
+  <div class="loadout-block">
+    <h3>Field Upgrade</h3>
+    <ul>
+      <li>Frenzy Guard (solo)</li>
+      <li>Ether Shroud (co-op or solo)</li>
+    </ul>
+  </div>
+  <div class="loadout-block">
+    <h3>Gobblegums (Boss)</h3>
+    <ul>
+      <li>Shields Up</li>
+      <li>Power Keg</li>
+      <li>Raindrops</li>
+      <li>Near-Death Experience (co-op)</li>
+    </ul>
+  </div>
+  <div class="loadout-block">
+    <h3>Ammo Mod</h3>
+    <ul>
+      <li>Dead Wire (Necropincer is weak to it)</li>
+    </ul>
+  </div>
+  <div class="loadout-block">
+    <h3>Quick Revive Augment</h3>
+    <ul>
+      <li>Equivalent Exchange (boss insurance)</li>
+    </ul>
+  </div>
+</div>
+
+<div class="tip-card">
+  <strong>General tips before you start</strong>
+  Grab a fishing pole as soon as you see one. There is one in the barrel near spawn on Fishery Island and another in Bloodheim Hall. You will need it later and walking back wastes time. Also pick up the free RCXD on the box in Eid Skarland Square if you spot it.
+</div>
+
+</section>
+
+<section aria-labelledby="phase-1-heading">
+<div class="phase">
+<h2 id="phase-1-heading">Phase 1: Power, Pack-a-Punch, and Setup</h2>
+<p class="phase-intro">The map walks you through power and Pack-a-Punch with on-screen prompts. The steps below cover what those prompts ask of you, plus the early wonder weapon prep that you can knock out before round 10.</p>
+
+<div class="step" id="step-1">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-1-body">
+    <span class="step-number">01</span>
+    <span class="step-title">Activate the two broken power lines</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-1-body" role="region" hidden>
+    <p>Follow the on-screen waypoints to repair both broken power lines. One is across the map on Skarland Market side and the other is reached through Core Foundry. Open doors as you go to keep your routes flexible later.</p>
+    <p>Tip: turn on the rage inducer at spawn for the first three rounds to bank essence quickly, then turn it off.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-2">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-2-body">
+    <span class="step-number">02</span>
+    <span class="step-title">Enter Tier&rsquo;s head and grab the admin keycard</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-2-body" role="region" hidden>
+    <p>After both power lines are repaired, follow the waypoint into Tier&rsquo;s head. You have a one-minute timer inside. Hold square on the central terminal to activate it.</p>
+    <p>Behind you are four ejection tubes. One has a smoking zombie inside. Take that tube. When you hit the ground, the zombie that ejects with you drops the <strong>admin keycard</strong>. Pick it up.</p>
+    <div class="tip-card">
+      <strong>Note</strong>
+      Any of the four tubes will work but the zombie tube is the most consistent. Drop location is randomized each game.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-3">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-3-body">
+    <span class="step-number">03</span>
+    <span class="step-title">Open the war factory and grab the Glock drop controller</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-3-body" role="region" hidden>
+    <p>Take the keycard to the war factory on the west side of the map. Use it on the admin door scanner. Inside, on the back shelf, you will find the <strong>Glock drop controller</strong>. Grab it.</p>
+    <p>Then head to Fishery Island, stand in the purple circle near the center, and hold square. Run laps for about 45 seconds while it charges. Pack-a-Punch spawns in when the timer ends.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section aria-labelledby="phase-2-heading">
+<div class="phase">
+<h2 id="phase-2-heading">Phase 2: Yotun Star Wonder Weapon</h2>
+<p class="phase-intro">Three parts: chain links, chili chunks, and the lantern (drops from Zersa on a frost round, typically round 10). You can collect chains and chili in any order before round 10. The lantern is round-locked.</p>
+
+<div class="step" id="step-4">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-4-body">
+    <span class="step-number">04</span>
+    <span class="step-title">Get the chain links from the boat in dry dock</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-4-body" role="region" hidden>
+    <p>Head to the dry dock. There is a piece of wall in front of the boat held up by a crane. Go into the small Titan crane room nearby and press the button to lower the wall.</p>
+    <p>Once the wall stops moving, you have a short window. Wall jump off the middle of the wall and hold interact in mid-air to grab the <strong>chain links</strong> off the tip of the boat.</p>
+    <div class="tip-card">
+      <strong>If you miss it</strong>
+      The wall raises back up. Just press the button again to lower it. You can retry as many times as needed.
+    </div>
+    <div class="tip-card warning">
+      <strong>Watch out</strong>
+      Clear most of the round&rsquo;s zombies before you try this. Stamina Up helps if you keep falling short. The hitbox is generous, so do not overthink the angle.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-5">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-5-body">
+    <span class="step-number">05</span>
+    <span class="step-title">Grab the chili chunks and place them in the market</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-5-body" role="region" hidden>
+    <p>Go to the Storm Bridge. Behind the truck in the middle of the bridge, near Deadshot, is a crate with a tin of <strong>chili chunks</strong>. Grab it.</p>
+    <p>Take it to Skarland Market and place it on the table near Mule Kick.</p>
+    <div class="tip-card confirm">
+      <strong>Round timing</strong>
+      Place the can <em>before</em> round 10 and the next frost round (round 10) will spawn the Zersa. Place it <em>after</em> round 10 and the next round will be a frost round with Zersa. Either way, the Zersa appears on the round following placement.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-6">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-6-body">
+    <span class="step-number">06</span>
+    <span class="step-title">Repair the burial grounds tomb door</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-6-body" role="region" hidden>
+    <p>Head to the burial grounds in the back right of the map. Place the chains on the left side of the door, then hold interact to repair it. This takes a while, so do it between rounds.</p>
+    <p>The bars come off and the doors open, revealing the room with the altar. Leave the lantern part for now. You do not have it yet.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-7">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-7-body">
+    <span class="step-number">07</span>
+    <span class="step-title">Kill the Zersa on the frost round and grab the lantern</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-7-body" role="region" hidden>
+    <p>On the frost round following the chili placement, a special Zersa HVT will spawn somewhere on the map. Hunt it down and kill it. It drops the <strong>lantern</strong>.</p>
+    <div class="tip-card">
+      <strong>Pro tip</strong>
+      Hang out near the burial grounds while you wait. The juggernog machine is right next door and there is an instakill power-up sitting on a tombstone in the burial grounds. Save it for when you hear the Zersa roar, then melt it instantly.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-8">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-8-body">
+    <span class="step-number">08</span>
+    <span class="step-title">Solve the constellation puzzle in the tomb</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-8-body" role="region" hidden>
+    <p>Take the lantern down into the tomb you opened in step 6 and place it on the altar. Four constellations appear on the sides of the altar (left, right, back, front) and matching symbols rotate around the walls.</p>
+    <p>Find each wall constellation that matches an altar side, then interact with it. <strong>The order is fixed: left, then right, then back, then front.</strong></p>
+    <div class="tip-card">
+      <strong>How to know it&rsquo;s working</strong>
+      If you got it right, the matching altar symbol stays lit and the orb returns to the lantern. If all symbols disappear, you got one wrong. Just start back from the left side.
+    </div>
+    <p>Once all four are correct, Astrid spawns above the altar.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-9">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-9-body">
+    <span class="step-number">09</span>
+    <span class="step-title">Follow Astrid, fill two soul boxes, climb to the lighthouse</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-9-body" role="region" hidden>
+    <p>Astrid teleports through the burial grounds and Skarland Market, then stops at her first soul box near the market. Kill zombies (frost zombies and purple-eyed zombies count) until the energy bar fills up.</p>
+    <p>Follow her to the second soul box near the lighthouse zip line. Fill it the same way. There is an armor wall buy nearby, grab the upgrade if you need it.</p>
+    <p>After the second box fills, floating rock platforms spawn. Parkour up them to the lighthouse second floor. Then head up the stairs. You will see the ice giant rise out of the ocean. Do not stop to watch.</p>
+    <p>Run onto the platform in front of the lighthouse, drop down, and wall-bounce up the next series of platforms back to the top. Climb the ladder at the top to enter the lighthouse interior. Astrid powers up the <strong>Yotun Star</strong> and you can pick it up off the table.</p>
+    <div class="tip-card warning">
+      <strong>Don&rsquo;t linger</strong>
+      Picking up the wonder weapon teleports you out. If there is intel up there you want, grab it first.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section aria-labelledby="phase-3-heading">
+<div class="phase">
+<h2 id="phase-3-heading">Phase 3: Wonder Signal</h2>
+<p class="phase-intro">Three parts: the flack gun round (from a labeled crate), the transmitter (from the spawn robot), and the light flash sequence input. Output is the wonder barrage controller.</p>
+
+<div class="step" id="step-10">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-10-body">
+    <span class="step-number">10</span>
+    <span class="step-title">Get the crowbar, read the manifest, find the right crate</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-10-body" role="region" hidden>
+    <p>Inside the lighthouse second floor is a <strong>crowbar</strong> on a back shelf. Grab it.</p>
+    <p>Head to the war factory admin room. The cargo manifest is on a back-right shelf. Look for the row with the three-bullets icon and write down the ID number to the left of it (Roman numeral plus regular number, like <span class="kbd">V7</span> or <span class="kbd">III-6</span>).</p>
+    <p>Now find the matching crate. There are four locations:</p>
+    <ul>
+      <li>Behind the boat in dry dock</li>
+      <li>Bottom of Core Foundry, next to VS Recon wall buy</li>
+      <li>Inside the war factory itself</li>
+      <li>End of Fjord Road, behind the still-locked room</li>
+    </ul>
+    <p>Open <strong>only</strong> the crate matching your manifest ID. The right one drops the flack gun round.</p>
+    <div class="tip-card warning">
+      <strong>Wrong crate penalties</strong>
+      Wrong crates trigger EMP, sight grenades, or extended poison gas. Double-check your ID before opening.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-11">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-11-body">
+    <span class="step-number">11</span>
+    <span class="step-title">Fire the flack cannon at the spawn robot, get the transmitter</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-11-body" role="region" hidden>
+    <p>Take the flack gun round to Beacon Island. Find the flack cannon pointing toward spawn. Interact at the back of it to load the round.</p>
+    <p>Now melee the back of the cannon with the Yotun Star. The cannon fires and hits the robot in the spawn area.</p>
+    <p>Run to the spawn robot. Hold interact on the broken section to search it (this takes a while, do it during a calm moment, progress saves if you get swarmed). You get a chunk of salvage and the <strong>transmitter</strong>.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-12">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-12-body">
+    <span class="step-number">12</span>
+    <span class="step-title">Install the transmitter, read the light sequences, input on the console</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-12-body" role="region" hidden>
+    <p>Re-enter Tier&rsquo;s head. Take the ladder on the left up to the top floor. Interact with the sparking panel to install the <strong>transmitter</strong>.</p>
+    <p>Two lights start flashing. They flash <strong>twice</strong>: two separate sequences with different numbers. Each sequence: both flash together briefly, then left flashes solo, then right flashes solo.</p>
+    <div class="tip-card">
+      <strong>Easier counting method</strong>
+      Watch only the left light through both sequences. Note both left numbers. Then watch only the right light through both sequences. Note both right numbers. Trying to track both at once is rough.
+    </div>
+    <p>On your way out of Tier&rsquo;s head, throw a molotov (or hit it with the Yotun Star) at the rope in Core Foundry to melt the ice. Climb up to the console.</p>
+    <p>Set <strong>amplitude = left number</strong> and <strong>frequency = right number</strong> for sequence 1. If correct, you get kicked off the console and rockets fire from the spawn robot.</p>
+    <p>Wait about 30 seconds for the console to reactivate. Input sequence 2. Another rocket strike fires.</p>
+    <p>The <strong>wonder barrage controller</strong> spawns nearby in Core Foundry. Pick it up.</p>
+    <div class="tip-card">
+      <strong>Off by one?</strong>
+      If you think you miscounted, try one above or one below your number. Wrong inputs just kick you off (no round penalty) and the console reactivates after about 30 seconds.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section aria-labelledby="phase-4-heading">
+<div class="phase">
+<h2 id="phase-4-heading">Phase 4: Atomcraft Core</h2>
+<p class="phase-intro">Three uranium pieces (jail cell puzzle, irradiated ravager, Glock drop), then the claw machine, then defend and deliver the core to the bridge. This is the longest phase, so pace yourself.</p>
+
+<div class="step" id="step-13">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-13-body">
+    <span class="step-number">13</span>
+    <span class="step-title">Open the machine workshop with the wonder barrage</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-13-body" role="region" hidden>
+    <p>Go to the dry dock crafting table area. Aim the wonder barrage controller at the ground in front of the blocked staircase next to Melee Macchiato. The strike clears the debris and opens the machine workshop.</p>
+    <p>Inside is a claw machine. You cannot use it yet. You need three uranium pieces first.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-14">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-14-body">
+    <span class="step-number">14</span>
+    <span class="step-title">Uranium #1: Genetic lab, jar puzzle, lockpick</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-14-body" role="region" hidden>
+    <p>Pick up an RCXD. The box on top of the building in Eid Skarland Square has a free one every game. Or buy one at a crafting table for 1,000 salvage.</p>
+    <p>Head to Core Foundry near Fishery Island and shoot the grate to reveal a hidden vent. Drive the RCXD through the vent. Press forward only (no jumps or boost) to land it on the small sailboat across the water. Drive it under the garage door and detonate near the front wall.</p>
+    <p>This unlocks a secret room next to the Pack-a-Punch on Fishery Island, the <strong>Group 935 genetic lab</strong>. Zipline over and drop in.</p>
+    <p>Look out the window at the back of the lab. Five numbered doors are visible. Two have <strong>nuclear hazard symbols</strong>. Note the two numbers.</p>
+    <p>Convert numbers to letters: 1=A, 2=B, 3=C, 4=D, 5=E. Find the matching jars around the lab. Place them on the machine in the correct order.</p>
+    <div class="tip-card confirm">
+      <strong>Confirmation</strong>
+      A new jar with <strong>purple liquid</strong> appears on the machine. If it&rsquo;s not purple, you used the wrong heads. Reset and try again.
+    </div>
+    <p>Interact with the crab claw on the back table to dissolve and grab the <strong>necro spike</strong>. Use it on the jail cell as a lockpick. Rotate the spike until the shutter on the right glows white, then hold for a second. Three pins total. The cell opens and drops the first uranium.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-15">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-15-body">
+    <span class="step-number">15</span>
+    <span class="step-title">Uranium #2: Fish the irradiated ravager, kill it three times</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-15-body" role="region" hidden>
+    <p>Make sure you have a fishing pole. Fishing rod stands are scattered around the map: dry dock, Storm Bridge, Fishery Island, Beacon Island, near Tier&rsquo;s foot, lighthouse area.</p>
+    <p>Look in the water past each red rod holder for a <strong>green glowing fish</strong>. It will only be at one location per game. Check every spot if you do not see it.</p>
+    <p>Place your pole in the holder near the fish. Wait until the pole glows blue, then hold interact to reel in. An <strong>irradiated ravager</strong> spawns and immediately disappears.</p>
+    <div class="tip-card">
+      <strong>Pro move</strong>
+      Ping the ravager the second it spawns. Then it stays marked on your tac map permanently. If you miss the ping, end the round and it respawns at the original spot.
+    </div>
+    <p>Track it on your tac map (look for the HVT skull-and-horns icon among red dots). Damage it to make it teleport. Kill it three times total. The third kill drops the second uranium.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-16">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-16-body">
+    <span class="step-number">16</span>
+    <span class="step-title">Uranium #3: Glock drop on a horde, shoot 20 floating zombies</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-16-body" role="region" hidden>
+    <p>You need a Glock drop controller. If you replaced the original with the wonder barrage controller, craft one for 2,000 salvage. You can also fish one up at any normal fishing spot, since the rod sometimes drops a Glock for free.</p>
+    <p>Build up a big train of zombies. Call in the Glock drop. While it pulses, zombies float into the air. <strong>Only kill the floating ones</strong>. You need around 20 to count.</p>
+    <p>Decoy grenades help here. So does Ether Shroud for breathing room.</p>
+    <p>If you hit the threshold, the Glock drops the third uranium when it leaves.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-17">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-17-body">
+    <span class="step-number">17</span>
+    <span class="step-title">Claw machine puzzle, then defend and deliver the core</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-17-body" role="region" hidden>
+    <p>Take all three uranium pieces back to the machine workshop. Place them in the claw machine and interact to take controls.</p>
+    <p>You have three light bulbs to place on the right-side power grid. Existing bulbs already create connections. The needle has to land in the <strong>green zone</strong>: not too low (undercharged), not too high (overloaded).</p>
+    <div class="tip-card">
+      <strong>Reliable solution shape</strong>
+      Place bulbs to form one group of 6 connections and one group of 3. That tends to land in green. Avoid placing the first bulb in a heavily-connected row, or it will overload immediately.
+    </div>
+    <div class="tip-card warning">
+      <strong>One attempt per round</strong>
+      If you fail, you have to turn the round before retrying. Take your time on the first attempt.
+    </div>
+    <p>If you land in green, the machine drops the <strong>Atomcraft Core</strong>. Pick it up. <em>You cannot sprint while carrying it.</em></p>
+    <p>Walk the core to spawn. Place it on the wooden box / pallet stack to the right of Quick Revive. Then enter the small shack behind it and flip the generator switch.</p>
+    <p>Defend the core through a wave event. The charge interrupts periodically. Run back into the shack each time and reactivate the generator. Decoys and Ether Shroud help.</p>
+    <p>When the core is fully charged, pick it back up. Walk it to the Storm Bridge.</p>
+    <div class="tip-card warning">
+      <strong>The walk to the bridge</strong>
+      You take damage continuously while carrying the charged core. Mini icebergs spawn out of the ground. Melee them with the Yotun Star or take a different path. If your health drops too low, you drop the core; pick it back up and keep going.
+    </div>
+    <p>Place the core on the black-and-yellow striped barrel in the middle of the Storm Bridge. Watch the cinematic. After it ends, head to the left side of the bridge near the robot teleport. A <strong>Drevkar shard</strong> sits on the ground. Grab it.</p>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section aria-labelledby="phase-5-heading">
+<div class="phase">
+<h2 id="phase-5-heading">Phase 5: Pyre Lockdown and Compass Symbols</h2>
+<p class="phase-intro">Two final steps before the boss is unlocked: the Bloodheim Hall pyre lockdown for the sunstone, and the church compass for the symbol-pyre sequence.</p>
+
+<div class="step" id="step-18">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-18-body">
+    <span class="step-number">18</span>
+    <span class="step-title">Pyre lockdown: ignite, throw zombies, kill the HVT, get the sunstone</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-18-body" role="region" hidden>
+    <p>Take the Drevkar shard to the Bloodheim Hall. Place it on the central fire pit.</p>
+    <p>Charge your Yotun Star by killing zombies, then use the left trigger throw to ignite the pyre with a <strong>charged Yotun Star toss</strong>. The flame should turn blue.</p>
+    <p>Get a disciple injection score streak. There is a free one in the church on the floor. Grab it on the way. If it&rsquo;s gone, craft one.</p>
+    <p>Use the disciple injection in Bloodheim Hall. Pick up zombies with left trigger and throw them into the pyre. Keep going until a white flash kicks you out and starts a lockdown.</p>
+    <p>Lockdown gives you instakill and max ammo. A <strong>Necropincer HVT</strong> spawns. The Yotun Star or your packed primary handles it fine. Dead Wire is its weakness.</p>
+    <p>Kill it. The <strong>sunstone</strong> spawns in front of the fire pit.</p>
+    <div class="tip-card warning">
+      <strong>Don&rsquo;t do this at end of round</strong>
+      Activating the disciple at the end of a round means your zombie supply runs out before lockdown triggers. Start it with plenty of zombies still alive.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+<div class="step" id="step-19">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-19-body">
+    <span class="step-number">19</span>
+    <span class="step-title">Place sunstone in church, light the three pyre symbols in order</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-19-body" role="region" hidden>
+    <p>Take the sunstone to the central pedestal in the church. Place it. Hit it with the Yotun Star.</p>
+    <p>A blue beacon shoots up. In the sky is a compass with three arrows pointing at three different symbols. <strong>Look at the tip of each arrow, not the base.</strong></p>
+    <ul>
+      <li>The arrow with <strong>one line</strong> through it = symbol 1 (light first)</li>
+      <li>The arrow with <strong>two lines</strong> = symbol 2</li>
+      <li>The arrow with <strong>three lines</strong> = symbol 3</li>
+    </ul>
+    <p>Around the map are floating mounds, each with a unique symbol. Possible locations include the burial grounds, Eid Skarland Square, near the lighthouse, the spawn room, and the left side of the bridge.</p>
+    <p>Charge your Yotun Star by killing zombies, then throw the lantern (left trigger) at the matching mound for symbol 1. Then symbol 2. Then symbol 3.</p>
+    <div class="tip-card confirm">
+      <strong>You did it right when</strong>
+      All three pyres stay lit, you hear a confirmation quote from the robot, and the arrows on the beacon converge into one. You are now eligible for the boss fight.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+<section aria-labelledby="phase-6-heading">
+<div class="phase">
+<h2 id="phase-6-heading">Phase 6: Boss Fight, Drevkar</h2>
+<p class="phase-intro">A long, bullet-spongy fight against the ice giant Drevkar. Tier (the spawn robot) helps you in phases. The fight has roughly four damage windows on the boss, separated by ice Viking head sub-phases. End it with a meteor-dodging final stand.</p>
+
+<div class="tip-card warning">
+  <strong>Before you start the fight</strong>
+  Pack-a-Punch tier 3 on your primary. Yotun Star upgraded as far as you can afford. Quick Revive with Equivalent Exchange augment for the self-revive into damage trick. Self-revive kit. Boss-fight gobblegums (Shields Up, Power Keg, Raindrops, Near-Death Experience for co-op).
+</div>
+
+<div class="step" id="step-20">
+  <button type="button" class="step-header" aria-expanded="false" aria-controls="step-20-body">
+    <span class="step-number">20</span>
+    <span class="step-title">Start the fight, hit the red weak spots, survive the heads, dodge the meteors</span>
+    <span class="step-toggle" aria-hidden="true">&#9662;</span>
+  </button>
+  <div class="step-body" id="step-20-body" role="region" hidden>
+    <h3>Round 1: Damage windows on the giant</h3>
+    <p>Enter Tier&rsquo;s head and interact with the front panel to start the fight. Tier carries Drevkar out into the arena and they grapple. Most of your shots are non-critical filler. The real damage windows open when <strong>red weak spots glow</strong> on Drevkar&rsquo;s body. Burn ammo into those.</p>
+    <p>Tier disappears periodically. Drevkar uses area denial (freezes parts of the arena floor). Move to unfrozen ground. When Tier returns, frost zombies show up. Turn on a trap to clear them and stay warm.</p>
+
+    <h3>Sub-phase: First Viking head</h3>
+    <p>Drevkar walks off. A floating ice Viking head spawns in the middle. <strong>Charge the Yotun Star, throw the lantern at it</strong> to knock it down. While it&rsquo;s stunned, dump damage. Akimbo 1911s one-shot these. Voyak typically needs two lantern hits before the head drops.</p>
+
+    <h3>Round 2: Meteor attacks added</h3>
+    <p>Drevkar returns with the same red weak spots, plus <strong>ice meteor barrages</strong>. Hide behind pillars (there are several around the arena). Peek out to keep shooting weak spots between volleys. He also freezes new sections of the arena, so relocate to thawed ground.</p>
+    <div class="tip-card">
+      <strong>Out of ammo?</strong>
+      The ammo box in the middle of the arena freezes over. <strong>Melee it with the Yotun Star</strong> to thaw it before purchasing. Keep your lantern charged: it keeps you warm while you move between left, middle, and right.
+    </div>
+
+    <h3>Sub-phase: Two Viking heads</h3>
+    <p>Same drill, but now there are two heads: one on left or right side, one elsewhere. Lantern throw to knock them down. <strong>Watch your footing</strong>. The heads spawn icebergs that can launch you. Falling off the map respawns you red-screened. Wait for the head to finish an attack before throwing.</p>
+
+    <h3>Round 3: Same patterns, more pressure</h3>
+    <p>Drevkar returns. Red weak spots. Meteor barrages. Pillar dancing. There are no max ammos or full armors in this fight, so use Frenzy Guard for armor recovery if you need it.</p>
+
+    <h3>Sub-phase: Three Viking heads</h3>
+    <p>Three heads now: left, middle, right. Same lantern-then-bullets routine. Take them out one at a time to keep the chaos manageable.</p>
+
+    <h3>Final phase: Eyes</h3>
+    <p>Drevkar returns one last time. Red weak spots are now on his eyes. He locks you in the center of the arena. There is a max ammo waiting in the middle.</p>
+    <p>Endless meteor barrages in different shape patterns. Duck and weave through the gaps. The only ones you can&rsquo;t dodge are ground-level barrages. <strong>Prone</strong> to avoid them.</p>
+    <p>Shoot the eyes the entire time. Frenzy Guard for the extra durability. Self-revive in solo just by shooting the eyes a bit with your secondary.</p>
+    <div class="tip-card confirm">
+      <strong>End</strong>
+      Tier returns to deliver the killing blow. Cutscene plays. You get the ice heart and the achievement. Easter egg complete.
+    </div>
+    <button type="button" class="complete-btn">Mark complete</button>
+  </div>
+</div>
+
+</div>
+</section>
+
+</main>
+
+<aside class="credits" aria-labelledby="credits-heading">
+<h2 id="credits-heading">Credits</h2>
+<p>This guide is built from the work of these creators. Watch their full videos for visuals, timing details, and live demonstrations:</p>
+<ul>
+  <li>
+    <a href="https://www.youtube.com/watch?v=dCLUPjdJ58w" target="_blank" rel="noopener noreferrer">
+      &ldquo;TOTENREICH&rdquo; EASTER EGG GUIDE! FULL EASTER EGG TUTORIAL <span class="visually-hidden">(opens in new tab)</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.youtube.com/watch?v=yL2jJ5cld8Q" target="_blank" rel="noopener noreferrer">
+      TOTENREICH Ultimate Easter Egg Guide Solo Made EASY <span class="visually-hidden">(opens in new tab)</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.youtube.com/watch?v=9VkjydUnBH0" target="_blank" rel="noopener noreferrer">
+      Totenreich Optimized EE Guide! Round 18 Complete <span class="visually-hidden">(opens in new tab)</span>
+    </a>
+  </li>
+  <li>
+    <span class="creator">Mr. Ruff Waffles</span>:
+    <a href="https://www.youtube.com/watch?v=t4nfWhaLiDs" target="_blank" rel="noopener noreferrer">
+      ULTIMATE TOTENREICH EASTER EGG GUIDE (Black Ops 7 Zombies) <span class="visually-hidden">(opens in new tab)</span>
+    </a>
+  </li>
+</ul>
+</aside>
+
+<footer>
+  <p>Built for ZombiesTips. Last updated for Black Ops 7 Zombies, 2026.</p>
+</footer>
+
+</div>
+
+<script>
+(function() {
+  'use strict';
+
+  var STORAGE_KEY = 'totenreich-progress';
+  var steps = document.querySelectorAll('.step');
+  var headers = document.querySelectorAll('.step-header');
+  var completeButtons = document.querySelectorAll('.complete-btn');
+  var resetBtn = document.getElementById('reset-progress');
+  var countEl = document.getElementById('completed-count');
+  var totalSteps = steps.length;
+
+  // Update step count display in case HTML count differs
+  document.querySelector('.progress-count').innerHTML =
+    '<span id="completed-count">0</span> of ' + totalSteps;
+  countEl = document.getElementById('completed-count');
+
+  // Toggle step expand/collapse
+  headers.forEach(function(header) {
+    header.addEventListener('click', function() {
+      var expanded = header.getAttribute('aria-expanded') === 'true';
+      var bodyId = header.getAttribute('aria-controls');
+      var body = document.getElementById(bodyId);
+      header.setAttribute('aria-expanded', !expanded);
+      if (expanded) {
+        body.setAttribute('hidden', '');
+      } else {
+        body.removeAttribute('hidden');
+      }
+    });
+  });
+
+  // Mark complete button
+  completeButtons.forEach(function(btn) {
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      var step = btn.closest('.step');
+      step.classList.toggle('completed');
+      btn.innerHTML = step.classList.contains('completed') ? 'Completed &check; (click to undo)' : 'Mark complete';
+      updateCount();
+      saveProgress();
+    });
+  });
+
+  function updateCount() {
+    var completed = document.querySelectorAll('.step.completed').length;
+    if (countEl) {
+      countEl.textContent = completed;
+    }
+  }
+
+  function saveProgress() {
+    try {
+      var completedIds = [];
+      document.querySelectorAll('.step.completed').forEach(function(s) {
+        completedIds.push(s.id);
+      });
+      // In-memory only; localStorage may not be available in all sandboxes
+      window.__totenreichProgress = completedIds;
+    } catch (e) {
+      // Fail silently
+    }
+  }
+
+  // Reset
+  resetBtn.addEventListener('click', function() {
+    document.querySelectorAll('.step.completed').forEach(function(s) {
+      s.classList.remove('completed');
+      var btn = s.querySelector('.complete-btn');
+      if (btn) btn.innerHTML = 'Mark complete';
+    });
+    window.__totenreichProgress = [];
+    updateCount();
+  });
+
+  updateCount();
+})();
+</script>
+
+</body>
+</html>
