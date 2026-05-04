@@ -23,6 +23,21 @@ A complete main quest Easter egg walkthrough for the Paradox Junction map. Cover
 
 **[▶ View the Paradox Junction Guide](https://belovedcoachp.github.io/ZombiesTips/paradox-junction-guide.html)**
 
+### Totenreich — Black Ops 7 Zombies
+> Season 3 Reloaded | Main Easter Egg Walkthrough
+
+A complete main quest Easter egg walkthrough for the Totenreich map. Covers all 17 steps including the wonder weapon build, Wonder Signal, Atomcraft Core, and the final boss fight — solo and co-op compatible.
+
+**Features:**
+- Collapsible step-by-step sections
+- Progress tracker with step counter
+- Mark Complete checklist for each step
+- Recommended loadout for the boss fight
+- Wonder weapon and Wonder Signal walkthroughs
+- Boss fight phase breakdowns
+
+**[▶ View the Totenreich Guide](https://belovedcoachp.github.io/ZombiesTips/totenreich-guide.html)**
+
 ---
 
 ## ♿ Accessibility
@@ -72,8 +87,9 @@ Your guide will be live at:
 
 ```
 ZombiesTips/
-├── index.html                      # Landing page (coming soon)
+├── index.html                      # Landing page
 ├── paradox-junction-guide.html     # Paradox Junction Easter egg guide
+├── totenreich-guide.html           # Totenreich Easter egg guide
 ├── README.md                       # This file
 └── LICENSE                         # MIT License
 ```
