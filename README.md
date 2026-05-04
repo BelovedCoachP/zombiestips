@@ -65,7 +65,7 @@ Guides are compiled from multiple community video walkthroughs. All original con
 | Creator | Video |
 |---|---|
 | Ch0pper | [Ultimate Solo Easter Egg Guide](https://youtu.be/LpOssxFKx9I) |
-| MrRoflWaffles | [No-Nonsense Easter Egg Guide](https://youtu.be/d55f7C4fXqA) |
+| Mr.RoflWaffles | [No-Nonsense Easter Egg Guide](https://youtu.be/d55f7C4fXqA) |
 | MrDalekJD | [Full Easter Egg Tutorial](https://youtu.be/Bw9dW8PyFHw) |
 
 ---
